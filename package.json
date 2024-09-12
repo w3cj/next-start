@@ -1,7 +1,6 @@
 {
   "name": "next-start",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -48,5 +47,6 @@
     "prettier-plugin-tailwindcss": "^0.6.6",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "license": "MIT"
 }
