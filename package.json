@@ -10,7 +10,11 @@
     "format": "prettier src/ --write"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.4.6",
+    "@tabler/icons-react": "^3.16.0",
+    "framer-motion": "^11.5.4",
     "next": "14.2.9",
+    "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18"
   },
