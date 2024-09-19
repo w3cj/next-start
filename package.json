@@ -23,7 +23,7 @@
     "drizzle-zod": "^0.5.1",
     "framer-motion": "^11.5.4",
     "jiti": "^1.21.6",
-    "next": "14.2.9",
+    "next": "14.2.12",
     "next-auth": "^4.24.7",
     "next-themes": "^0.3.0",
     "postgres": "^3.4.4",
