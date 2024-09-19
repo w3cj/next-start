@@ -10,7 +10,7 @@
     "db:migrate": "cross-env DB_MIGRATING=true drizzle-kit migrate"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.4.2",
+    "@auth/drizzle-adapter": "^1.5.0",
     "@conform-to/react": "^1.1.5",
     "@conform-to/zod": "^1.1.5",
     "@nextui-org/react": "^2.4.6",
