@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.5.0",
-    "@conform-to/react": "^1.1.5",
+    "@conform-to/react": "^1.2.1",
     "@conform-to/zod": "^1.1.5",
     "@nextui-org/react": "^2.4.6",
     "@t3-oss/env-nextjs": "^0.11.1",
