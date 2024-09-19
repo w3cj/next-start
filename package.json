@@ -11,12 +11,12 @@
     "db:migrate": "cross-env DB_MIGRATING=true drizzle-kit migrate"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.4.2",
-    "@conform-to/react": "^1.1.5",
-    "@conform-to/zod": "^1.1.5",
-    "@nextui-org/react": "^2.4.6",
+    "@auth/drizzle-adapter": "^1.5.0",
+    "@conform-to/react": "^1.2.1",
+    "@conform-to/zod": "^1.2.1",
+    "@nextui-org/react": "^2.4.8",
     "@t3-oss/env-nextjs": "^0.11.1",
-    "@tabler/icons-react": "^3.16.0",
+    "@tabler/icons-react": "^3.17.0",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "drizzle-orm": "^0.33.0",
@@ -39,14 +39,14 @@
     "cross-env": "^7.0.3",
     "drizzle-kit": "^0.24.2",
     "eslint": "^8",
-    "eslint-config-next": "14.2.9",
+    "eslint-config-next": "14.2.12",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-check-file": "^2.8.0",
     "eslint-plugin-n": "^17.10.3",
     "postcss": "^8",
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^3.4.12",
     "typescript": "^5"
   }
 }
