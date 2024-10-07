@@ -12,8 +12,8 @@
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
     "@tabler/icons-react": "^3.19.0",
-    "framer-motion": "^11.9.0",
-    "next": "14.2.13",
+    "framer-motion": "^11.11.1",
+    "next": "14.2.14",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18"
@@ -24,7 +24,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.13",
+    "eslint-config-next": "14.2.14",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-check-file": "^2.8.0",
     "postcss": "^8",
