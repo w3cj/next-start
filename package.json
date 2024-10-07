@@ -14,7 +14,7 @@
     "@t3-oss/env-nextjs": "^0.11.1",
     "@tabler/icons-react": "^3.19.0",
     "framer-motion": "^11.9.0",
-    "jiti": "^1.21.6",
+    "jiti": "^2.3.2",
     "next": "14.2.13",
     "next-auth": "^4.24.8",
     "next-themes": "^0.3.0",
