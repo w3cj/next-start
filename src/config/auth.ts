@@ -9,8 +9,6 @@ const options: NextAuthOptions = {
   pages: {
     signIn: "/",
   },
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   adapter: DrizzleAdapter(db),
   callbacks: {
     session({ session, user }) {
