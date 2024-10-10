@@ -22,7 +22,7 @@
     "drizzle-orm": "^0.33.0",
     "drizzle-zod": "^0.5.1",
     "framer-motion": "^11.11.1",
-    "jiti": "^1.21.6",
+    "jiti": "^2.3.3",
     "next": "14.2.14",
     "next-auth": "^4.24.8",
     "next-themes": "^0.3.0",
