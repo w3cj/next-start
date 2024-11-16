@@ -14,7 +14,7 @@ A basic Next.js starter.
   - [eslint](https://www.npmjs.com/package/eslint)
     - [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier)
       - [ESLint | Next.js](https://nextjs.org/docs/app/building-your-application/configuring/eslint#prettier)
-    - [eslint-plugin-check-file](https://www.nvpmjs.com/package/eslint-plugin-check-file)
+    - [eslint-plugin-check-file](https://www.npmjs.com/package/eslint-plugin-check-file)
       - [Bulletproof React Guide](https://github.com/alan2207/bulletproof-react/blob/master/docs/project-standards.md#file-naming-conventions)
     - [eslint-plugin-n](https://www.npmjs.com/package/eslint-plugin-n)
   - [prettier](https://www.npmjs.com/package/prettier)
