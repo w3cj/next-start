@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
-    "@tabler/icons-react": "^3.21.0",
-    "framer-motion": "^11.11.11",
+    "@tabler/icons-react": "^3.22.0",
+    "framer-motion": "^11.11.17",
     "next": "14.2.14",
-    "next-themes": "^0.4.1",
+    "next-themes": "^0.4.3",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -28,9 +28,9 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-check-file": "^2.8.0",
     "postcss": "^8",
-    "prettier": "3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
-    "tailwindcss": "^3.4.14",
+    "prettier": "3.4.0",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "tailwindcss": "^3.4.15",
     "typescript": "^5"
   }
 }
