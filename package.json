@@ -10,13 +10,13 @@
     "format": "prettier src/ --write"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.4.8",
+    "@nextui-org/react": "^2.6.5",
     "@t3-oss/env-nextjs": "^0.11.1",
-    "@tabler/icons-react": "^3.21.0",
-    "framer-motion": "^11.11.11",
-    "jiti": "^2.4.0",
+    "@tabler/icons-react": "^3.24.0",
+    "framer-motion": "^11.13.1",
+    "jiti": "^2.4.1",
     "next": "14.2.14",
-    "next-themes": "^0.4.1",
+    "next-themes": "^0.4.4",
     "react": "^18",
     "react-dom": "^18",
     "zod": "^3.23.8"
@@ -30,11 +30,11 @@
     "eslint-config-next": "14.2.14",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-check-file": "^2.8.0",
-    "eslint-plugin-n": "^17.12.0",
+    "eslint-plugin-n": "^17.14.0",
     "postcss": "^8",
-    "prettier": "3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
-    "tailwindcss": "^3.4.14",
+    "prettier": "3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "tailwindcss": "^3.4.16",
     "typescript": "^5"
   }
 }
