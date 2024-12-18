@@ -1,4 +1,4 @@
-export { default as accounts } from "./accounts";
+export { default as accounts, verificationTokens } from "./accounts";
 export {
   default as guestbookEntries,
   guestbookEntriesRelations,

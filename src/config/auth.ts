@@ -1,15 +1,12 @@
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import EmailProvider from "next-auth/providers/email";
 
 import db from "@/db";
 import { env } from "@/env/server";
+import { DrizzleEmailAdapter } from "@/utils/drizzle-email-adapter";
 
 const options: NextAuthOptions = {
-  pages: {
-    signIn: "/",
-  },
-  adapter: DrizzleAdapter(db),
+  adapter: DrizzleEmailAdapter(db),
   callbacks: {
     session({ session, user }) {
       session.user.id = user.id;
@@ -17,9 +14,16 @@ const options: NextAuthOptions = {
     },
   },
   providers: [
-    GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    EmailProvider({
+      from: env.EMAIL_FROM,
+      server: {
+        host: env.EMAIL_SERVER_HOST,
+        port: env.EMAIL_SERVER_PORT,
+        auth: {
+          user: env.EMAIL_SERVER_USER,
+          pass: env.EMAIL_SERVER_PASSWORD,
+        },
+      },
     }),
   ],
 };

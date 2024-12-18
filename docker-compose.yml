@@ -9,3 +9,9 @@ services:
       - ${DB_PORT}:5432
     volumes:
       - ./docker-data/db:/var/lib/postgresql/data
+  mailhog:
+    image: mailhog/mailhog:latest
+    restart: always
+    ports:
+      - ${EMAIL_SERVER_PORT}:1025
+      - ${EMAIL_SERVER_HTTP_PORT}:8025
