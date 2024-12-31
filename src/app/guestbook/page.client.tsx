@@ -1,16 +1,17 @@
 "use client";
 
+import { useActionState } from "react";
+
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { Button, Textarea } from "@nextui-org/react";
-import { useFormState } from "react-dom";
 
 import { InsertGuestbookEntrySchema } from "@/db/schema/guestbook-entries";
 
 import { createGuestbookEntry } from "./actions";
 
 export default function GuestbookClient() {
-  const [lastResult, action] = useFormState(createGuestbookEntry, undefined);
+  const [lastResult, action] = useActionState(createGuestbookEntry, undefined);
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
