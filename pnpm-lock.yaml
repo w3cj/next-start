@@ -30,8 +30,8 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       dotenv-expand:
-        specifier: ^11.0.6
-        version: 11.0.6
+        specifier: ^12.0.1
+        version: 12.0.1
       drizzle-orm:
         specifier: ^0.38.3
         version: 0.38.3(@types/react@18.3.12)(postgres@3.4.5)(react@18.3.1)
@@ -2129,8 +2129,8 @@ packages:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
     engines: {node: '>=6.0.0'}
 
-  dotenv-expand@11.0.6:
-    resolution: {integrity: sha512-8NHi73otpWsZGBSZwwknTXS5pqMOrk9+Ssrna8xCaxkzEpU9OTf9R5ArQGVw03//Zmk9MOwLPng9WwndvpAJ5g==}
+  dotenv-expand@12.0.1:
+    resolution: {integrity: sha512-LaKRbou8gt0RNID/9RoI+J2rvXsBRPMV7p+ElHlPhcSARbCPDYcYG2s1TIzAfWv4YSgyY5taidWzzs31lNV3yQ==}
     engines: {node: '>=12'}
 
   dotenv@16.4.7:
@@ -6329,7 +6329,7 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  dotenv-expand@11.0.6:
+  dotenv-expand@12.0.1:
     dependencies:
       dotenv: 16.4.7
 
