@@ -1,0 +1,86 @@
+# Next.js 15 Enterprise Starter Kit Rules
+# Rules for maintaining high code quality and consistency
+
+# Architecture & Structure
+- Follow Next.js 15 App Router patterns and best practices
+- Use server components by default, client components only when necessary
+- Keep components small and focused
+- Maintain established project structure
+
+# Naming Conventions
+- Files: kebab-case (enforced by eslint-plugin-check-file)
+- Components: PascalCase
+- Variables/Functions: camelCase
+- Constants: UPPER_CASE
+- Client Components: Must have 'use client' directive
+
+# Code Organization
+- Place reusable components in src/components
+- Group related components in subdirectories
+- Create index.ts files for clean exports
+- Keep files focused and under 200 lines
+
+# State Management
+- Prefer React Server Components for server-side state
+- Use React hooks for client-side state
+- Keep state as local as possible
+- Use context only for truly global state
+
+# API Design
+- Place routes in src/app/api
+- Use proper HTTP methods and status codes
+- Implement comprehensive error handling
+- Validate all input with Zod schemas
+
+# Database Practices
+- Use Drizzle ORM for database operations
+- Maintain schemas in src/db/schema
+- Use migrations for database changes
+- Handle database errors appropriately
+
+# Authentication
+- Use NextAuth.js for auth flows
+- Implement proper authorization checks
+- Keep auth config in src/config/auth.ts
+- Use middleware for protected routes
+
+# Styling
+- Use Tailwind CSS for styling
+- Follow NextUI component patterns
+- Maintain dark/light theme support
+- Keep styles modular
+
+# Testing Requirements
+- Write unit tests for utilities and hooks
+- Test critical user flows
+- Cover both success and error cases
+- Maintain 80%+ test coverage
+
+# Security
+- No sensitive info in client code
+- Validate all user input
+- Use env vars for secrets
+- Implement proper CORS policies
+
+# Performance
+- Optimize images appropriately
+- Implement caching strategies
+- Minimize client-side JS
+- Use proper loading states
+
+# Documentation
+- Document complex logic
+- Maintain README
+- Document env vars
+- Add JSDoc for complex functions
+
+# Future Stripe Integration
+- Implement in separate module
+- Follow Stripe best practices
+- Handle webhooks properly
+- Use TypeScript throughout
+
+# UI Library
+- swap NextUI for shadcn/ui for UI components
+- Follow shadcn/ui best practices
+- Implement proper theming and dark mode compatibility
