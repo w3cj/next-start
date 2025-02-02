@@ -11,7 +11,7 @@ import {
   DropdownTrigger,
 } from "@nextui-org/react";
 import { IconBrandGoogle } from "@tabler/icons-react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function AuthButton({ minimal = true }: { minimal?: boolean }) {
@@ -64,30 +64,17 @@ export default function AuthButton({ minimal = true }: { minimal?: boolean }) {
     <ButtonGroup>
       <Button
         color="primary"
-        onClick={() => signIn("google")}
-        startContent={<IconBrandGoogle />}
+        onClick={() => router.push("/auth/signin")}
       >
-        Sign in with Google
+        Sign In
       </Button>
-      <Dropdown placement="bottom-end">
-        <DropdownTrigger>
-          <Button color="primary" variant="flat">
-            <span className="text-lg">▼</span>
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu 
-          aria-label="Sign in options" 
-          onAction={(key) => {
-            if (key === "email") {
-              router.push("/auth/signin");
-            }
-          }}
-        >
-          <DropdownItem key="email">
-            Sign in with Email
-          </DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+      <Button
+        color="primary"
+        variant="flat"
+        onClick={() => router.push("/auth/signup")}
+      >
+        Sign Up
+      </Button>
     </ButtonGroup>
   );
 }
