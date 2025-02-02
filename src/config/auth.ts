@@ -38,12 +38,27 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
       }
       return token;
+    },
+    async signIn({ user, account }) {
+      // Allow OAuth without email verification
+      if (account?.provider === "google") {
+        return true;
+      }
+
+      // For credentials, require email verification (optional)
+      if (account?.provider === "credentials") {
+        return true;
+      }
+
+      // Prevent sign in without email verification
+      return false;
     }
   },
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
       name: "Email",

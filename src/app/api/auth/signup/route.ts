@@ -1,5 +1,5 @@
 import db from "@/db"
-import { user } from "@/db/schema/auth"
+import users from "@/db/schema/users"
 import { hashPassword } from "@/utils/auth/password"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     // Check if user exists
     console.log("Checking for existing user...")
     const existingUser = await db.query.user.findFirst({
-      where: eq(user.email, email),
+      where: eq(users.email, email),
     })
     console.log("Existing user check result:", !!existingUser)
 
@@ -41,11 +41,11 @@ export async function POST(req: Request) {
     // Create new user
     console.log("Creating new user...")
     const [newUser] = await db
-      .insert(user)
+      .insert(users)
       .values({
         email,
         password: hashedPassword,
-        image: '', // Required field in your schema
+        image: '',
       })
       .returning()
     console.log("User created successfully:", { id: newUser.id, email: newUser.email })
@@ -56,6 +56,7 @@ export async function POST(req: Request) {
           id: newUser.id,
           email: newUser.email,
         },
+        redirect: '/',
       },
       { status: 201 }
     )
