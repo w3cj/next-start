@@ -1,5 +1,6 @@
 "use client"
 
+import { GoogleUserModal } from "@/components/auth/google-user-modal"
 import { Icons } from "@/components/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button, Input } from "@nextui-org/react"
@@ -21,6 +22,8 @@ export function SignInForm() {
   const callbackUrl = searchParams.get("callbackUrl") || "/"
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string>("")
+  const [showGoogleModal, setShowGoogleModal] = React.useState(false)
+  const [googleEmail, setGoogleEmail] = React.useState("")
 
   const {
     register,
@@ -38,12 +41,17 @@ export function SignInForm() {
       const result = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        redirect: true,
+        redirect: false,
         callbackUrl,
       })
 
-      if (result?.error) {
+      if (result?.error === "GOOGLE_USER") {
+        setGoogleEmail(values.email)
+        setShowGoogleModal(true)
+      } else if (result?.error) {
         setError("Invalid email or password")
+      } else if (result?.url) {
+        window.location.href = result.url
       }
     } catch (error) {
       setError("Something went wrong")
@@ -97,7 +105,7 @@ export function SignInForm() {
         </div>
       </div>
       <Button
-        variant="outline"
+        variant="bordered"
         type="button"
         disabled={isLoading}
         onClick={() => signIn("google", { callbackUrl })}
@@ -109,6 +117,12 @@ export function SignInForm() {
         )}{" "}
         Google
       </Button>
+
+      <GoogleUserModal 
+        isOpen={showGoogleModal}
+        onClose={() => setShowGoogleModal(false)}
+        email={googleEmail}
+      />
     </div>
   )
 } 

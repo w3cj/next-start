@@ -75,8 +75,12 @@ export const authOptions: NextAuthOptions = {
           where: eq(users.email, credentials.email),
         }) as UserWithPassword | null;
 
-        if (!user || !user.password) {
+        if (!user) {
           throw new Error("No user found");
+        }
+
+        if (!user.password) {
+          throw new Error("GOOGLE_USER");  // Special error code for Google users
         }
 
         const isValid = await verifyPassword(credentials.password, user.password);
