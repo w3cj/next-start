@@ -1,26 +1,31 @@
 import db from "@/db"
-import { users } from "@/db/schema/auth"
+import { user } from "@/db/schema/auth"
 import { hashPassword } from "@/utils/auth/password"
-import { SQL } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
 const signupSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-  name: z.string().min(2).optional(),
 })
 
 export async function POST(req: Request) {
   try {
+    console.log("Starting signup process...")
+    
     const body = await req.json()
-    const { email, password, name } = signupSchema.parse(body)
+    console.log("Received body:", { ...body, password: '[REDACTED]' })
+    
+    const { email, password } = signupSchema.parse(body)
+    console.log("Validation passed")
 
     // Check if user exists
-    const existingUser = await db.query.users.findFirst({
-      where: (users: any, { eq }: { eq: (a: any, b: any) => SQL }) => 
-        eq(users.email, email),
+    console.log("Checking for existing user...")
+    const existingUser = await db.query.user.findFirst({
+      where: eq(user.email, email),
     })
+    console.log("Existing user check result:", !!existingUser)
 
     if (existingUser) {
       return NextResponse.json(
@@ -29,29 +34,38 @@ export async function POST(req: Request) {
       )
     }
 
+    console.log("Hashing password...")
     const hashedPassword = await hashPassword(password)
+    console.log("Password hashed successfully")
 
     // Create new user
-    const [user] = await db
-      .insert(users)
+    console.log("Creating new user...")
+    const [newUser] = await db
+      .insert(user)
       .values({
         email,
         password: hashedPassword,
-        name,
+        image: '', // Required field in your schema
       })
       .returning()
+    console.log("User created successfully:", { id: newUser.id, email: newUser.email })
 
     return NextResponse.json(
       {
         user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
+          id: newUser.id,
+          email: newUser.email,
         },
       },
       { status: 201 }
     )
-  } catch (error) {
+  } catch (error: unknown) {
+    console.error("Signup error details:", {
+      name: error instanceof Error ? error.name : 'Unknown',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    })
+    
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: error.errors },
@@ -60,7 +74,10 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json(
-      { error: "Internal server error" },
+      { 
+        error: "Internal server error", 
+        details: error instanceof Error ? error.message : String(error)
+      },
       { status: 500 }
     )
   }

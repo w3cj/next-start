@@ -1,14 +1,51 @@
-import { migrate } from "drizzle-orm/postgres-js/migrator";
+import { config } from 'dotenv'
+import { drizzle } from 'drizzle-orm/node-postgres'
+import { migrate } from 'drizzle-orm/node-postgres/migrator'
+import { Pool } from 'pg'
+import * as schema from './schema/auth'
 
-import config from "@/../drizzle.config";
-import { env } from "@/env/server";
+// Load environment variables
+config()
 
-import db, { client } from "./index";
-
-if (!env.DB_MIGRATING) {
-  throw new Error("You must set DB_MIGRATING to true.");
+// Verify environment variables
+const requiredEnvVars = ['DB_HOST', 'DB_PORT', 'DB_USER', 'DB_PASSWORD', 'DB_NAME']
+for (const envVar of requiredEnvVars) {
+  if (!process.env[envVar]) {
+    throw new Error(`Missing required environment variable: ${envVar}`)
+  }
 }
 
-await migrate(db, { migrationsFolder: config.out! });
+const pool = new Pool({
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  ssl: process.env.NODE_ENV === 'production'
+})
 
-await client.end();
+// Test the connection before migrating
+async function main() {
+  try {
+    console.log('Testing database connection...')
+    const client = await pool.connect()
+    console.log('Database connection successful')
+    client.release()
+
+    console.log('Running migrations...')
+    const db = drizzle(pool, { schema })
+    await migrate(db, { migrationsFolder: 'src/db/migrations' })
+    console.log('Migrations completed!')
+  } catch (err) {
+    console.error('Error:', err)
+    throw err
+  } finally {
+    await pool.end()
+  }
+}
+
+main().catch((err) => {
+  console.error('Migration failed!')
+  console.error(err)
+  process.exit(1)
+})

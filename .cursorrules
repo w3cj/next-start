@@ -30,6 +30,8 @@
 - Use React hooks for client-side state
 - Keep state as local as possible
 - Use context only for truly global state
+- Use React Query for data fetching and caching as much as possible
+- Use React Query for all data fetching
 
 # API Design
 
@@ -43,11 +45,12 @@
 - Use Drizzle ORM for database operations
 - Maintain schemas in src/db/schema
 - Use migrations for database changes
+- Use drizzle-kit for database migrations (don't use kysely)
 - Handle database errors appropriately
 
 # Authentication
 
-- Use NextAuth.js for auth flows
+- Use NextAuth.js v4 for auth flows
 - Implement proper authorization checks
 - Keep auth config in src/config/auth.ts
 - Use middleware for protected routes

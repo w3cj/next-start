@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
 import db from "@/db";
-import { users } from "@/db/schema/auth";
+import users from "@/db/schema/users";
 import { env } from "@/env/server";
 import { verifyPassword } from "@/utils/auth/password";
 import { eq } from "drizzle-orm";
@@ -15,9 +15,10 @@ interface UserWithPassword {
   name: string | null;
   password: string | null;
   image: string | null;
+  emailVerified: Date | null;
 }
 
-const options: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/auth/signin",
   },
@@ -32,6 +33,12 @@ const options: NextAuthOptions = {
       }
       return session;
     },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    }
   },
   providers: [
     GoogleProvider({
@@ -49,9 +56,9 @@ const options: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
-        const user = (await db.query.users.findFirst({
+        const user = await db.query.user.findFirst({
           where: eq(users.email, credentials.email),
-        })) as UserWithPassword | null;
+        }) as UserWithPassword | null;
 
         if (!user || !user.password) {
           throw new Error("No user found");
@@ -68,10 +75,11 @@ const options: NextAuthOptions = {
           email: user.email,
           name: user.name,
           image: user.image,
+          emailVerified: user.emailVerified,
         };
       }
     })
   ],
 };
 
-export default options;
+export default authOptions;
