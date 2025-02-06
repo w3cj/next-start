@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 
     // Check if user exists
     console.log("Checking for existing user...")
-    const existingUser = await db.query.user.findFirst({
+    const existingUser = await db.query.users.findFirst({
       where: eq(users.email, email),
     })
     console.log("Existing user check result:", !!existingUser)

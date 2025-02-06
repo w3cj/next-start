@@ -1,7 +1,15 @@
-export { default as accounts } from "./accounts";
+import * as auth from './auth';
+import { passwordResetToken } from './auth';
+import guestbookEntries, { guestbookEntriesRelations } from './guestbook-entries';
+
 export {
-  default as guestbookEntries,
-  guestbookEntriesRelations,
-} from "./guestbook-entries";
-export { default as sessions } from "./sessions";
-export { default as users } from "./users";
+    auth,
+    guestbookEntries,
+    guestbookEntriesRelations,
+    passwordResetToken
+};
+
+    export { default as accounts } from "./accounts";
+    export { default as sessions } from "./sessions";
+    export { default as users } from "./users";
+

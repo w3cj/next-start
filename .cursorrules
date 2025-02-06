@@ -42,7 +42,7 @@
 
 # Database Practices
 
-- Use Drizzle ORM for database operations
+- Use Drizzle ORM for database operations (don't use kysely)
 - Maintain schemas in src/db/schema
 - Use migrations for database changes
 - Use drizzle-kit for database migrations (don't use kysely)
@@ -106,3 +106,8 @@
 - swap NextUI for daisyui for UI components
 - Follow daisyui best practices
 - Implement proper theming and dark mode compatibility
+
+# Email
+
+- Use nodemailer SMTP for email sending
+- Use b2kcloud@gmail.com as sender

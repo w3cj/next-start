@@ -1,5 +1,5 @@
 import db from "@/db"
-import { passwordResetToken } from "@/db/schema/auth"
+import { passwordResetToken } from "@/db/schema"
 import users from "@/db/schema/users"
 import { hashPassword } from "@/utils/auth/password"
 import { and, eq, gt } from "drizzle-orm"

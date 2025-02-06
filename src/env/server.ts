@@ -23,6 +23,13 @@ export const env = createEnv({
       .refine((s) => s === "true" || s === "false")
       .transform((s) => s === "true")
       .optional(),
+    // SMTP Configuration
+    SMTP_HOST: z.string(),
+    SMTP_PORT: z.string(),
+    SMTP_SECURE: z.string(),
+    SMTP_USER: z.string(),
+    SMTP_PASSWORD: z.string(),
+    SMTP_FROM: z.string(),
   },
   onValidationError: (error: ZodError) => {
     console.error(

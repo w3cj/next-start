@@ -4,8 +4,6 @@
 
 [?] - NEXT - think about linking accounts the other way around. maybe with an add password modal on the profile page that is only visible if the user has no password and writes into the database.
 
-[ ] - NEXT - add a forgot password feature on the login page.
-
-[ ] - NEXT - add a change password feature on the profile page.
+[X] - NEXT - add a forgot password feature on the login page including a password reset email with nodemailer SMTP. (b2kcloud@gmail.com is the sender)
 
 [ ] - NEXT - add a delete account feature on the profile page.

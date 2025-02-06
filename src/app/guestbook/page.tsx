@@ -1,9 +1,9 @@
 import {
-  Avatar,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
+    Avatar,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
 } from "@nextui-org/react";
 
 import db from "@/db";
@@ -32,7 +32,7 @@ export default async function GuestBook() {
                   isBordered
                   radius="full"
                   size="md"
-                  src={entry.user.image}
+                  src={entry.user.image || ''}
                 />
                 <div className="flex flex-col items-start justify-center gap-1">
                   <h4 className="text-small font-semibold leading-none text-default-600">

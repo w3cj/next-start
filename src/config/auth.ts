@@ -71,7 +71,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
-        const user = await db.query.user.findFirst({
+        const user = await db.query.users.findFirst({
           where: eq(users.email, credentials.email),
         }) as UserWithPassword | null;
 

@@ -2,6 +2,8 @@ import db from "@/db"
 import { passwordResetToken } from "@/db/schema/auth"
 import users from "@/db/schema/users"
 import { env } from "@/env/server"
+import { sendEmail } from "@/utils/email/smtp"
+import { getPasswordResetEmailHtml } from "@/utils/email/templates/password-reset"
 import { createId } from "@paralleldrive/cuid2"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
@@ -17,7 +19,7 @@ export async function POST(req: Request) {
     const { email } = forgotPasswordSchema.parse(body)
 
     // Find user by email
-    const user = await db.query.user.findFirst({
+    const user = await db.query.users.findFirst({
       where: eq(users.email, email),
     })
 
@@ -43,10 +45,15 @@ export async function POST(req: Request) {
       expires,
     })
 
-    // TODO: Send email with reset link
-    // For now, we'll just log it
+    // Generate reset link
     const resetLink = `${env.NEXTAUTH_URL}/auth/reset-password?token=${token}`
-    console.log('Password reset link:', resetLink)
+
+    // Send email
+    await sendEmail({
+      to: email,
+      subject: "Reset Your Password",
+      html: getPasswordResetEmailHtml(resetLink),
+    })
 
     return NextResponse.json({
       message: "If an account exists with that email, a password reset link will be sent.",
