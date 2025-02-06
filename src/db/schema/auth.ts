@@ -31,5 +31,14 @@ export const session = pgTable('session', {
   expires: timestamp('expires').notNull(),
 })
 
+export const passwordResetToken = pgTable('password_reset_token', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull(),
+  token: text('token').notNull(),
+  expires: timestamp('expires').notNull(),
+})
+
 export type User = typeof user.$inferSelect
-export type NewUser = typeof user.$inferInsert 
+export type NewUser = typeof user.$inferInsert
+export type PasswordResetToken = typeof passwordResetToken.$inferSelect
+export type NewPasswordResetToken = typeof passwordResetToken.$inferInsert 

@@ -3,7 +3,7 @@
 import { GoogleUserModal } from "@/components/auth/google-user-modal"
 import { Icons } from "@/components/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Button, Input } from "@nextui-org/react"
+import { Button, Input, Link } from "@nextui-org/react"
 import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
 import * as React from "react"
@@ -81,6 +81,11 @@ export function SignInForm() {
             isInvalid={!!errors.password}
             errorMessage={errors.password?.message}
           />
+          <div className="text-right">
+            <Link href="/auth/forgot-password" size="sm">
+              Forgot password?
+            </Link>
+          </div>
         </div>
         {error && (
           <div className="text-danger text-sm">{error}</div>

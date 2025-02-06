@@ -1,12 +1,12 @@
 'use client'
 
 import {
-    Button,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
 } from "@nextui-org/react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"

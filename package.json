@@ -8,8 +8,8 @@
     "lint": "next lint",
     "format": "prettier src/ --write",
     "db:migrate": "tsx src/db/migrate.ts",
-    "db:generate": "drizzle-kit generate:pg",
-    "db:push": "drizzle-kit push:pg"
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.4",
