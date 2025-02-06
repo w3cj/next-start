@@ -16,11 +16,13 @@ interface UserWithPassword {
   password: string | null;
   image: string | null;
   emailVerified: Date | null;
+  disabled: boolean;
 }
 
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/auth/signin",
+    error: "/auth/error",
   },
   adapter: DrizzleAdapter(db),
   session: {
@@ -40,18 +42,29 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async signIn({ user, account }) {
-      // Allow OAuth without email verification
+      // Check if the account is disabled for all sign-in methods
+      if (user.email) {
+        const dbUser = await db.query.users.findFirst({
+          where: eq(users.email, user.email),
+        });
+
+        if (dbUser?.disabled) {
+          return false;
+        }
+      }
+
+      // For Google sign-in
       if (account?.provider === "google") {
-        return true;
+        const existingUser = await db.query.users.findFirst({
+          where: eq(users.email, user.email!),
+        });
+
+        if (existingUser?.disabled) {
+          return false;
+        }
       }
 
-      // For credentials, require email verification (optional)
-      if (account?.provider === "credentials") {
-        return true;
-      }
-
-      // Prevent sign in without email verification
-      return false;
+      return true;
     }
   },
   providers: [
@@ -83,6 +96,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error("GOOGLE_USER");  // Special error code for Google users
         }
 
+        if (user.disabled) {
+          throw new Error("Account is disabled");
+        }
+
         const isValid = await verifyPassword(credentials.password, user.password);
 
         if (!isValid) {
@@ -99,6 +116,17 @@ export const authOptions: NextAuthOptions = {
       }
     })
   ],
+  cookies: {
+    sessionToken: {
+      name: "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    }
+  }
 };
 
 export default authOptions;

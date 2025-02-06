@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { boolean, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 const users = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -7,6 +7,7 @@ const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: varchar("image", { length: 2048 }),
   password: text("password"),
+  disabled: boolean("disabled").notNull().default(false),
 });
 
 export default users;
