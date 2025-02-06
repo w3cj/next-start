@@ -1,17 +1,18 @@
 "use client";
 
 import {
-  Avatar,
-  Button,
-  ButtonGroup,
-  CircularProgress,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
+    Avatar,
+    Button,
+    ButtonGroup,
+    CircularProgress,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownTrigger,
 } from "@nextui-org/react";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function AuthButton({ minimal = true }: { minimal?: boolean }) {
@@ -50,7 +51,9 @@ export default function AuthButton({ minimal = true }: { minimal?: boolean }) {
         <DropdownMenu aria-label="Profile Actions" variant="flat">
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">{data.user?.email}</p>
+            <Link href="/profile" className="font-semibold text-primary hover:underline">
+              {data.user?.email}
+            </Link>
           </DropdownItem>
           <DropdownItem key="sign-out" color="danger" onClick={signOutClick}>
             Sign Out

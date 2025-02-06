@@ -3,14 +3,14 @@
 import React from "react";
 
 import {
-  Link,
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
+    Link,
+    Navbar,
+    NavbarBrand,
+    NavbarContent,
+    NavbarItem,
+    NavbarMenu,
+    NavbarMenuItem,
+    NavbarMenuToggle,
 } from "@nextui-org/react";
 import { IconPackage } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
@@ -31,10 +31,6 @@ export default function AppNavbar() {
 
   if (status === "authenticated") {
     menuItems.push(
-      {
-        label: "Profile",
-        href: "/profile",
-      },
       {
         label: "Guestbook",
         href: "/guestbook",
