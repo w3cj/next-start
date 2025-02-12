@@ -12,7 +12,6 @@ import {
 } from "@nextui-org/react";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { signOut, useSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -63,17 +62,26 @@ export default function AuthButton({ minimal = true }: { minimal?: boolean }) {
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
-          <DropdownItem key="profile" className="h-14 gap-2">
-            <p className="font-semibold">Signed in as</p>
-            <Link href="/profile" className="font-semibold text-primary hover:underline">
-              {data.user?.email}
-            </Link>
+          <DropdownItem 
+            key="profile" 
+            className="h-14 gap-2"
+            onClick={() => router.push('/profile')}
+          >
+            <div className="flex flex-col">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold text-primary">
+                {data.user?.email}
+              </p>
+            </div>
           </DropdownItem>
           {isAdminUser ? (
-            <DropdownItem key="admin">
-              <Link href="/admin/users" className="font-semibold text-primary hover:underline">
+            <DropdownItem 
+              key="admin"
+              onClick={() => router.push('/admin/users')}
+            >
+              <p className="font-semibold">
                 User Management
-              </Link>
+              </p>
             </DropdownItem>
           ) : null}
           <DropdownItem key="sign-out" color="danger" onClick={signOutClick}>
