@@ -28,11 +28,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User ID is required" }, { status: 400 });
     }
 
-    // Reactivate the user
+    // Make the user an admin
     const result = await db
       .update(users)
       .set({ 
-        disabled: false,
+        role: 'admin',
       })
       .where(eq(users.id, userId))
       .returning();
@@ -42,14 +42,15 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ 
-      message: "Account activated",
+      message: "User is now an admin",
       user: {
         id: result[0].id,
         email: result[0].email,
+        role: result[0].role,
       }
     });
   } catch (error) {
-    console.error("[ACTIVATE_ACCOUNT] Error:", error);
+    console.error("[MAKE_ADMIN] Error:", error);
     return NextResponse.json({ error: "Internal Error" }, { status: 500 });
   }
 } 

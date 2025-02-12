@@ -28,11 +28,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User ID is required" }, { status: 400 });
     }
 
-    // Reactivate the user
+    // Check if trying to remove last admin
+    const admins = await db.select().from(users).where(eq(users.role, 'admin'));
+    if (admins.length === 1) {
+      return NextResponse.json({ 
+        error: "Cannot remove the last admin" 
+      }, { status: 400 });
+    }
+
+    // Remove admin role
     const result = await db
       .update(users)
       .set({ 
-        disabled: false,
+        role: 'user',
       })
       .where(eq(users.id, userId))
       .returning();
@@ -42,14 +50,15 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ 
-      message: "Account activated",
+      message: "Admin role removed",
       user: {
         id: result[0].id,
         email: result[0].email,
+        role: result[0].role,
       }
     });
   } catch (error) {
-    console.error("[ACTIVATE_ACCOUNT] Error:", error);
+    console.error("[REMOVE_ADMIN] Error:", error);
     return NextResponse.json({ error: "Internal Error" }, { status: 500 });
   }
 } 

@@ -28,11 +28,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User ID is required" }, { status: 400 });
     }
 
-    // Reactivate the user
+    // Deactivate the user
     const result = await db
       .update(users)
       .set({ 
-        disabled: false,
+        disabled: true,
       })
       .where(eq(users.id, userId))
       .returning();
@@ -42,14 +42,14 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ 
-      message: "Account activated",
+      message: "Account deactivated",
       user: {
         id: result[0].id,
         email: result[0].email,
       }
     });
   } catch (error) {
-    console.error("[ACTIVATE_ACCOUNT] Error:", error);
+    console.error("[DEACTIVATE_ACCOUNT] Error:", error);
     return NextResponse.json({ error: "Internal Error" }, { status: 500 });
   }
 } 

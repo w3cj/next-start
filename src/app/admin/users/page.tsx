@@ -3,9 +3,9 @@ import { redirect } from "next/navigation";
 
 import { Card, CardBody, CardHeader, Chip } from "@nextui-org/react";
 
+import { checkAdminStatus } from "@/app/admin/actions";
 import options from "@/config/auth";
 import db from "@/db";
-import { isAdmin } from "@/utils/auth/admin";
 
 import ManageUserActions from "./manage-user-actions";
 
@@ -16,7 +16,7 @@ export default async function AdminUsersPage() {
     redirect("/auth/signin");
   }
 
-  const isAdminUser = await isAdmin(session.user.email);
+  const isAdminUser = await checkAdminStatus();
   if (!isAdminUser) {
     redirect("/");
   }

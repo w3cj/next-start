@@ -14,10 +14,24 @@ import { IconBrandGoogle } from "@tabler/icons-react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+import { checkAdminStatus } from "@/app/admin/actions";
 
 export default function AuthButton({ minimal = true }: { minimal?: boolean }) {
   const { data, status } = useSession();
   const router = useRouter();
+  const [isAdminUser, setIsAdminUser] = useState(false);
+
+  useEffect(() => {
+    async function check() {
+      if (status === "authenticated") {
+        const isAdmin = await checkAdminStatus();
+        setIsAdminUser(isAdmin);
+      }
+    }
+    check();
+  }, [status]);
 
   if (status === "loading") {
     return <CircularProgress aria-label="Loading authentication status..." />;
@@ -55,6 +69,13 @@ export default function AuthButton({ minimal = true }: { minimal?: boolean }) {
               {data.user?.email}
             </Link>
           </DropdownItem>
+          {isAdminUser ? (
+            <DropdownItem key="admin">
+              <Link href="/admin/users" className="font-semibold text-primary hover:underline">
+                User Management
+              </Link>
+            </DropdownItem>
+          ) : null}
           <DropdownItem key="sign-out" color="danger" onClick={signOutClick}>
             Sign Out
           </DropdownItem>
