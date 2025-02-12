@@ -7,6 +7,7 @@ interface User {
   id: string;
   email: string;
   disabled: boolean;
+  blocked: boolean;
   role: 'admin' | 'user';
 }
 
@@ -18,7 +19,7 @@ export default function ManageUserActions({ user }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleUpdateUser = async (action: 'activate' | 'deactivate' | 'make-admin' | 'remove-admin') => {
+  const handleUpdateUser = async (action: 'activate' | 'block' | 'make-admin' | 'remove-admin') => {
     try {
       setIsLoading(true);
       setError(null);
@@ -51,7 +52,16 @@ export default function ManageUserActions({ user }: Props) {
     <div className="flex flex-col gap-2 items-end">
       {error && <p className="text-danger text-sm">{error}</p>}
       <ButtonGroup size="sm">
-        {user.disabled ? (
+        {user.blocked ? (
+          <Button
+            color="success"
+            variant="flat"
+            onPress={() => handleUpdateUser('activate')}
+            isLoading={isLoading}
+          >
+            Unblock & Activate
+          </Button>
+        ) : user.disabled ? (
           <Button
             color="success"
             variant="flat"
@@ -64,10 +74,10 @@ export default function ManageUserActions({ user }: Props) {
           <Button
             color="danger"
             variant="flat"
-            onPress={() => handleUpdateUser('deactivate')}
+            onPress={() => handleUpdateUser('block')}
             isLoading={isLoading}
           >
-            Deactivate
+            Block User
           </Button>
         )}
         {user.role === 'admin' ? (

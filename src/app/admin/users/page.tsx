@@ -40,14 +40,23 @@ export default async function AdminUsersPage() {
                   <div>
                     <p className="font-semibold">{user.email}</p>
                     <div className="flex gap-2 mt-2">
-                      {user.disabled && (
+                      {user.blocked ? (
                         <Chip color="danger" size="sm">
-                          Disabled
+                          Blocked
                         </Chip>
-                      )}
+                      ) : user.disabled ? (
+                        <Chip color="warning" size="sm">
+                          Self-Disabled
+                        </Chip>
+                      ) : null}
                       {user.emailVerified && (
                         <Chip color="success" size="sm">
                           Verified
+                        </Chip>
+                      )}
+                      {user.role === 'admin' && (
+                        <Chip color="primary" size="sm">
+                          Admin
                         </Chip>
                       )}
                     </div>

@@ -28,12 +28,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User ID is required" }, { status: 400 });
     }
 
-    // Reactivate the user and unblock if blocked
+    // Block the user
     const result = await db
       .update(users)
       .set({ 
-        disabled: false,
-        blocked: false,
+        disabled: true,
+        blocked: true,
       })
       .where(eq(users.id, userId))
       .returning();
@@ -43,14 +43,14 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ 
-      message: "Account activated",
+      message: "Account blocked",
       user: {
         id: result[0].id,
         email: result[0].email,
       }
     });
   } catch (error) {
-    console.error("[ACTIVATE_ACCOUNT] Error:", error);
+    console.error("[BLOCK_ACCOUNT] Error:", error);
     return NextResponse.json({ error: "Internal Error" }, { status: 500 });
   }
 } 

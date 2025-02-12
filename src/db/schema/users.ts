@@ -10,6 +10,7 @@ const users = pgTable("user", {
   image: varchar("image", { length: 2048 }),
   password: text("password"),
   disabled: boolean("disabled").notNull().default(false),
+  blocked: boolean("blocked").notNull().default(false),
   role: userRoleEnum("role").notNull().default('user'),
 });
 

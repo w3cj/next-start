@@ -33,10 +33,13 @@ export async function POST() {
     await db.delete(sessions).where(eq(sessions.userId, user.id));
     console.log("[DELETE_ACCOUNT] Deleted all sessions for user");
 
-    // Soft delete the user by setting disabled flag
+    // Soft delete the user by setting disabled flag (but not blocked)
     const result = await db
       .update(users)
-      .set({ disabled: true })
+      .set({ 
+        disabled: true,
+        blocked: false // Ensure blocked is false for self-deletion
+      })
       .where(eq(users.id, user.id))
       .returning();
 
