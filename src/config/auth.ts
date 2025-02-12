@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (dbUser?.disabled) {
-          return false;
+          throw new Error("This account has been disabled. Please contact support to reactivate your account.");
         }
       }
 
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (existingUser?.disabled) {
-          return false;
+          throw new Error("This account has been disabled. Please contact support to reactivate your account.");
         }
       }
 

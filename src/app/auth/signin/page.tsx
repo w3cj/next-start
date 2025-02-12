@@ -1,19 +1,30 @@
-import { SignInForm } from "@/components/auth/sign-in-form"
+import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function SignInPage() {
+import ReactivationRequestForm from "@/components/auth/reactivation-request-form";
+import { SignInForm } from "@/components/auth/sign-in-form";
+import options from "@/config/auth";
+
+export default async function SignInPage() {
+  const session = await getServerSession(options);
+
+  if (session) {
+    redirect("/");
+  }
+
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-        <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Enter your email to sign in to your account
-          </p>
-        </div>
-        <SignInForm />
-      </div>
+    <div className="container mx-auto p-4 max-w-md">
+      <Card>
+        <CardHeader>
+          <h1 className="text-2xl font-bold">Sign In</h1>
+        </CardHeader>
+        <CardBody>
+          <SignInForm />
+          <Divider className="my-4" />
+          <ReactivationRequestForm />
+        </CardBody>
+      </Card>
     </div>
-  )
+  );
 } 
