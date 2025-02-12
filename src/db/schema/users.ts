@@ -1,4 +1,6 @@
-import { boolean, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { boolean, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+
+export const userRoleEnum = pgEnum('user_role', ['admin', 'user']);
 
 const users = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -8,6 +10,7 @@ const users = pgTable("user", {
   image: varchar("image", { length: 2048 }),
   password: text("password"),
   disabled: boolean("disabled").notNull().default(false),
+  role: userRoleEnum("role").notNull().default('user'),
 });
 
 export default users;
