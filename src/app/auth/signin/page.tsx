@@ -1,8 +1,7 @@
-import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-import ReactivationRequestForm from "@/components/auth/reactivation-request-form";
 import { SignInForm } from "@/components/auth/sign-in-form";
 import options from "@/config/auth";
 
@@ -21,8 +20,7 @@ export default async function SignInPage() {
         </CardHeader>
         <CardBody>
           <SignInForm />
-          <Divider className="my-4" />
-          <ReactivationRequestForm />
+         
         </CardBody>
       </Card>
     </div>

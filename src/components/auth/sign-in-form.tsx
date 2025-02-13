@@ -123,6 +123,16 @@ export function SignInForm() {
         Google
       </Button>
 
+      <div className="text-center">
+        <Link 
+          href="/auth/reactivate" 
+          size="sm" 
+          className="text-default-500"
+        >
+          Need to reactivate your account?
+        </Link>
+      </div>
+
       <GoogleUserModal 
         isOpen={showGoogleModal}
         onClose={() => setShowGoogleModal(false)}
