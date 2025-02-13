@@ -2,8 +2,12 @@
 
 [X] - 2025-02-02 - add account linking when login with google is used AND if credentials are provided first (NOT if google is used first and then credentials bc that would be a security risk)
 
-[?] - NEXT - think about linking accounts the other way around. maybe with an add password modal on the profile page that is only visible if the user has no password and writes into the database.
+[X] - 20250213 - add a forgot password feature on the login page including a password reset email with nodemailer SMTP. (b2kcloud@gmail.com is the sender)
 
-[X] - NEXT - add a forgot password feature on the login page including a password reset email with nodemailer SMTP. (b2kcloud@gmail.com is the sender)
+[X] - 20250213 - add a user management page for admin use only.
 
-[ ] - NEXT - add a delete account feature on the profile page.
+[X] - 20250213 - add a delete account (soft delete) feature with auto reactivation for self deleted accounts.
+
+[X] - 20250213 - add a block / unblock user feature for admin use only.
+
+[X] - 20250213 - add role assign buttons (user / admin) on the user management page.
