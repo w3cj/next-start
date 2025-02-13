@@ -1,16 +1,25 @@
 import db from "@/db"
-import { passwordResetToken } from "@/db/schema/auth"
-import users from "@/db/schema/users"
+import { passwordResetToken, user } from "@/db/schema/auth"
 import { env } from "@/env/server"
-import { sendEmail } from "@/utils/email/smtp"
-import { getPasswordResetEmailHtml } from "@/utils/email/templates/password-reset"
 import { createId } from "@paralleldrive/cuid2"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
+import { createTransport } from "nodemailer"
 import { z } from "zod"
 
 const forgotPasswordSchema = z.object({
   email: z.string().email(),
+})
+
+// Create nodemailer transporter with your env variables
+const transporter = createTransport({
+  host: env.SMTP_HOST,
+  port: Number(env.SMTP_PORT), // Make sure port is a number
+  secure: env.SMTP_SECURE === 'true', // Convert string to boolean
+  auth: {
+    user: env.SMTP_USER,
+    pass: env.SMTP_PASSWORD,
+  },
 })
 
 export async function POST(req: Request) {
@@ -18,57 +27,92 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { email } = forgotPasswordSchema.parse(body)
 
-    // Find user by email
-    const user = await db.query.users.findFirst({
-      where: eq(users.email, email),
-    })
+    console.log('Processing reset request for:', email)
 
-    if (!user) {
+    // Find user by email using direct query
+    const foundUser = await db
+      .select()
+      .from(user)
+      .where(eq(user.email, email))
+      .limit(1)
+      .then(rows => rows[0])
+
+    console.log('User found:', foundUser ? 'yes' : 'no')
+
+    if (!foundUser) {
       // Return 200 even if user doesn't exist for security
       return NextResponse.json({
         message: "If an account exists with that email, a password reset link will be sent.",
       })
     }
 
-    // Delete any existing reset tokens for this user
-    await db.delete(passwordResetToken)
-      .where(eq(passwordResetToken.userId, user.id))
+    try {
+      // Delete any existing reset tokens for this user
+      await db
+        .delete(passwordResetToken)
+        .where(eq(passwordResetToken.userId, foundUser.id))
+      
+      console.log('Deleted existing reset tokens')
 
-    // Create reset token
-    const token = createId()
-    const expires = new Date(Date.now() + 3600000) // 1 hour from now
+      // Create reset token
+      const token = createId()
+      const expires = new Date(Date.now() + 3600000) // 1 hour from now
 
-    // Save token to database
-    await db.insert(passwordResetToken).values({
-      userId: user.id,
-      token,
-      expires,
-    })
+      // Save token to database
+      await db
+        .insert(passwordResetToken)
+        .values({
+          userId: foundUser.id,
+          token,
+          expires,
+        })
 
-    // Generate reset link
-    const resetLink = `${env.NEXTAUTH_URL}/auth/reset-password?token=${token}`
+      console.log('Created new reset token')
 
-    // Send email
-    await sendEmail({
-      to: email,
-      subject: "Reset Your Password",
-      html: getPasswordResetEmailHtml(resetLink),
-    })
+      // Generate reset link
+      const resetUrl = `${env.NEXTAUTH_URL}/auth/reset-password?token=${token}`
+
+      // Send email
+      await transporter.sendMail({
+        from: env.SMTP_FROM,
+        to: email,
+        subject: "Reset Your Password",
+        html: `
+          <h1>Reset Your Password</h1>
+          <p>Click the link below to reset your password:</p>
+          <p><a href="${resetUrl}">${resetUrl}</a></p>
+          <p>This link will expire in 1 hour.</p>
+          <p>If you didn't request this, please ignore this email.</p>
+        `,
+      })
+
+      console.log('Email sent successfully')
+
+    } catch (innerError) {
+      console.error('Inner operation failed:', innerError)
+      throw innerError
+    }
 
     return NextResponse.json({
       message: "If an account exists with that email, a password reset link will be sent.",
     })
   } catch (error) {
+    // More detailed error logging
+    console.error("Password reset error details:", {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    })
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: error.errors },
+        { error: "Invalid email format" },
         { status: 400 }
       )
     }
 
-    console.error('Forgot password error:', error)
     return NextResponse.json(
-      { error: "Something went wrong" },
+      { error: "Failed to process password reset request" },
       { status: 500 }
     )
   }

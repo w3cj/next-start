@@ -23,6 +23,9 @@ pool.connect((err) => {
   }
 });
 
-const db = drizzle(pool, { schema });
+const db = drizzle(pool, { 
+  schema,
+  logger: process.env.NODE_ENV === 'development',
+});
 
 export default db;

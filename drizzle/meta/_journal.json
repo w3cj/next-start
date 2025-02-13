@@ -15,6 +15,27 @@
       "when": 1738853057557,
       "tag": "0001_unusual_black_bird",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739440369351,
+      "tag": "0002_complex_oracle",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1739440439493,
+      "tag": "0003_jittery_vengeance",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1739440980001,
+      "tag": "0004_low_triton",
+      "breakpoints": true
     }
   ]
 }
