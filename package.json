@@ -20,7 +20,7 @@
     "dotenv-expand": "^12.0.1",
     "drizzle-orm": "^0.41.0",
     "drizzle-zod": "^0.7.1",
-    "framer-motion": "^11.15.0",
+    "framer-motion": "^12.23.0",
     "jiti": "^2.4.2",
     "next": "15.2.4",
     "next-auth": "^4.24.11",
