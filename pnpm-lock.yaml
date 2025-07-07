@@ -94,8 +94,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(eslint@9.23.0(jiti@2.4.2))
       eslint-plugin-check-file:
-        specifier: ^2.8.0
-        version: 2.8.0(eslint@9.23.0(jiti@2.4.2))
+        specifier: ^3.3.0
+        version: 3.3.0(eslint@9.23.0(jiti@2.4.2))
       eslint-plugin-n:
         specifier: ^17.17.0
         version: 17.17.0(eslint@9.23.0(jiti@2.4.2))
@@ -2654,11 +2654,11 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
 
-  eslint-plugin-check-file@2.8.0:
-    resolution: {integrity: sha512-FvvafMTam2WJYH9uj+FuMxQ1y+7jY3Z6P9T4j2214cH0FBxNzTcmeCiGTj1Lxp3mI6kbbgsXvmgewvf+llKYyw==}
+  eslint-plugin-check-file@3.3.0:
+    resolution: {integrity: sha512-D57NBJRZt/8KzROsYgvRJzzItztWsP5B/9TssGhLHrrZzOMIFDn3RLnZN4kD7i5B4FduR040eOEqzKEcfFA9mQ==}
     engines: {node: '>=18'}
     peerDependencies:
-      eslint: '>=7.28.0'
+      eslint: '>=9.0.0'
 
   eslint-plugin-es-x@7.8.0:
     resolution: {integrity: sha512-7Ds8+wAAoV3T+LAKeu39Y5BzXCrGKrcISfgKEqTS4BDN8SFEDQd0S43jiQ8vIa3wUKD07qitZdfzlenSi8/0qQ==}
@@ -7195,7 +7195,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-check-file@2.8.0(eslint@9.23.0(jiti@2.4.2)):
+  eslint-plugin-check-file@3.3.0(eslint@9.23.0(jiti@2.4.2)):
     dependencies:
       eslint: 9.23.0(jiti@2.4.2)
       is-glob: 4.0.3
