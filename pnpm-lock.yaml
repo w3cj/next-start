@@ -40,8 +40,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(eslint@9.22.0(jiti@1.21.7))
       eslint-plugin-check-file:
-        specifier: ^2.8.0
-        version: 2.8.0(eslint@9.22.0(jiti@1.21.7))
+        specifier: ^3.3.0
+        version: 3.3.0(eslint@9.22.0(jiti@1.21.7))
       postcss:
         specifier: ^8
         version: 8.5.3
@@ -802,11 +802,11 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
 
-  eslint-plugin-check-file@2.8.0:
-    resolution: {integrity: sha512-FvvafMTam2WJYH9uj+FuMxQ1y+7jY3Z6P9T4j2214cH0FBxNzTcmeCiGTj1Lxp3mI6kbbgsXvmgewvf+llKYyw==}
+  eslint-plugin-check-file@3.3.0:
+    resolution: {integrity: sha512-D57NBJRZt/8KzROsYgvRJzzItztWsP5B/9TssGhLHrrZzOMIFDn3RLnZN4kD7i5B4FduR040eOEqzKEcfFA9mQ==}
     engines: {node: '>=18'}
     peerDependencies:
-      eslint: '>=7.28.0'
+      eslint: '>=9.0.0'
 
   eslint-plugin-import@2.31.0:
     resolution: {integrity: sha512-ixmkI62Rbc2/w8Vfxyh1jQRTdRTF52VxwRVHl/ykPAmqG+Nb7/kNn+byLP0LxPgI7zWA16Jt82SybJInmMia3A==}
@@ -2660,7 +2660,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-check-file@2.8.0(eslint@9.22.0(jiti@1.21.7)):
+  eslint-plugin-check-file@3.3.0(eslint@9.22.0(jiti@1.21.7)):
     dependencies:
       eslint: 9.22.0(jiti@1.21.7)
       is-glob: 4.0.3
