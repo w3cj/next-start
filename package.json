@@ -39,7 +39,7 @@
     "drizzle-kit": "^0.30.6",
     "eslint": "^9.23.0",
     "eslint-config-next": "15.2.4",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-check-file": "^2.8.0",
     "eslint-plugin-n": "^17.17.0",
     "postcss": "^8",
