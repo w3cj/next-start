@@ -27,8 +27,8 @@ importers:
         specifier: ^3.31.0
         version: 3.31.0(react@18.3.1)
       dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
+        specifier: ^17.0.1
+        version: 17.0.1
       dotenv-expand:
         specifier: ^12.0.1
         version: 12.0.1
@@ -2417,8 +2417,12 @@ packages:
     resolution: {integrity: sha512-LaKRbou8gt0RNID/9RoI+J2rvXsBRPMV7p+ElHlPhcSARbCPDYcYG2s1TIzAfWv4YSgyY5taidWzzs31lNV3yQ==}
     engines: {node: '>=12'}
 
-  dotenv@16.4.7:
-    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
+  dotenv@16.6.1:
+    resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
+    engines: {node: '>=12'}
+
+  dotenv@17.0.1:
+    resolution: {integrity: sha512-GLjkduuAL7IMJg/ZnOPm9AnWKJ82mSE2tzXLaJ/6hD6DhwGfZaXG77oB8qbReyiczNxnbxQKyh0OE5mXq0bAHA==}
     engines: {node: '>=12'}
 
   drizzle-kit@0.30.6:
@@ -6921,9 +6925,11 @@ snapshots:
 
   dotenv-expand@12.0.1:
     dependencies:
-      dotenv: 16.4.7
+      dotenv: 16.6.1
 
-  dotenv@16.4.7: {}
+  dotenv@16.6.1: {}
+
+  dotenv@17.0.1: {}
 
   drizzle-kit@0.30.6:
     dependencies:
