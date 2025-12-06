@@ -1,7 +1,7 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { config } from "dotenv";
 import { expand } from "dotenv-expand";
-import { ZodError, z } from "zod";
+import { z } from "zod";
 
 expand(config());
 
@@ -24,10 +24,10 @@ export const env = createEnv({
       .transform((s) => s === "true")
       .optional(),
   },
-  onValidationError: (error: ZodError) => {
+  onValidationError: (issues) => {
     console.error(
       "❌ Invalid environment variables:",
-      error.flatten().fieldErrors
+      issues.map((i) => i.path).flat()
     );
     process.exit(1);
   },
