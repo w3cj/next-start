@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 
 import { useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
+import { parseWithZod } from "@conform-to/zod/v4";
 import { Button, Textarea } from "@nextui-org/react";
 
 import { InsertGuestbookEntrySchema } from "@/db/schema/guestbook-entries";
