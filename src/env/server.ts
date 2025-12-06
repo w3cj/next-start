@@ -1,14 +1,14 @@
 import { createEnv } from "@t3-oss/env-nextjs";
-import { ZodError, z } from "zod";
+import { z } from "zod";
 
 export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "production"]),
   },
-  onValidationError: (error: ZodError) => {
+  onValidationError: (issues) => {
     console.error(
       "❌ Invalid environment variables:",
-      error.flatten().fieldErrors
+      issues.map((i) => i.path).flat()
     );
     process.exit(1);
   },
