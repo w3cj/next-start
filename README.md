@@ -1,5 +1,8 @@
 # Next Start
 
+> [!IMPORTANT]  
+> All branches have been updated to the latest patched version of React / Next.js as of 2025-12-05. Be sure to update your deployments as well. See the notes [here](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components) and [here](https://nextjs.org/blog/CVE-2025-66478)
+
 A basic Next.js starter.
 
 - [Next Start](#next-start)
