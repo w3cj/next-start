@@ -11,19 +11,19 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.6.11",
-    "@tabler/icons-react": "^3.35.0",
-    "framer-motion": "^12.23.25",
+    "@tabler/icons-react": "^3.36.0",
+    "framer-motion": "^12.23.26",
     "next": "15.5.7",
     "next-themes": "^0.4.6",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "eslint-config-next": "15.5.7",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-check-file": "^3.3.1",
